@@ -10,37 +10,32 @@ public class GameResult {
     }
 
     public boolean isWin(){
-        if (strikeCount == 3)
+        if (strikeCount == BallsInfo.BALL_COUNT)
             return true;
         return false;
     }
-
-    public void compareBalls(NumberBaseball guessBalls, NumberBaseball answerBalls) {
-        strikeCount = getStrike(guessBalls, answerBalls);
-        ballCount = getBall(guessBalls, answerBalls);
+    public void compareBalls(BallsInfo guessBalls, BallsInfo answerBalls) {
+        strikeCount = countStrike(guessBalls, answerBalls);
+        ballCount = countBall(guessBalls, answerBalls);
     }
+    public long getStrikeCount(){ return strikeCount; }
+    public long getBallCount(){ return ballCount; }
 
-    private long getStrike(NumberBaseball guessBalls, NumberBaseball answerBalls){
+    private long countStrike(BallsInfo guessBalls, BallsInfo answerBalls){
         return guessBalls.getBalls().stream()
                 .filter(i -> answerBalls.getBalls().contains(i))
                 .filter(i -> isSameIndex(i, guessBalls, answerBalls))
                 .count();
     }
-
-    private long getBall(NumberBaseball guessBalls, NumberBaseball answerBalls){
+    private long countBall(BallsInfo guessBalls, BallsInfo answerBalls){
         return guessBalls.getBalls().stream()
                 .filter(i -> answerBalls.getBalls().contains(i))
                 .filter(i -> !isSameIndex(i, guessBalls, answerBalls))
                 .count();
     }
-
-    private boolean isSameIndex(int i, NumberBaseball guessBalls, NumberBaseball answerBalls){
+    private boolean isSameIndex(int i, BallsInfo guessBalls, BallsInfo answerBalls){
         if (guessBalls.getBalls().indexOf(i) == answerBalls.getBalls().indexOf(i))
             return true;
         return false;
     }
-
-    public long getStrikeCount(){ return strikeCount; }
-
-    public long getBallCount(){ return ballCount; }
 }

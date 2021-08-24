@@ -8,48 +8,39 @@ import java.util.ArrayList;
 import java.util.Set;
 import utils.Views;
 
-public class Game {
+public class PlayGame {
     private final Scanner userInput;
     private GameResult gameResult;
-    private NumberBaseball guessBalls;
-    private NumberBaseball answerBalls;
+    private BallsInfo guessBalls;
+    private BallsInfo answerBalls;
 
-    public Game(Scanner userInput){
-        this.userInput = userInput;
-    }
+    public PlayGame(Scanner userInput){ this.userInput = userInput; }
 
-    public void play(){
-        initialize();
+    public void playGame(){
+        initialGame();
         while (gameResult.isWin() != true)
             playingGame();
         System.out.println(Views.GAME_OVER);
     }
 
-   private void initialize(){
+   private void initialGame(){
         gameResult = new GameResult();
-        answerBalls = new NumberBaseball(createRandomBalls());
+        answerBalls = new BallsInfo(createRandomBalls());
     }
-
     private List<Integer> createRandomBalls(){
         Set<Integer> setRandomBalls = new LinkedHashSet<>();
-        while (setRandomBalls.size() != 3)
-            setRandomBalls.add(RandomUtils.nextInt(1, 9));
+        while (setRandomBalls.size() != BallsInfo.BALL_COUNT)
+            setRandomBalls.add(RandomUtils.nextInt(BallsInfo.BALL_MIN_VAL, BallsInfo.BALL_MAX_VAL));
         List<Integer> listRandomBalls = new ArrayList<>(setRandomBalls);
         return listRandomBalls;
     }
-
-
-
     private void playingGame(){
-        generateGuessBalls();
+        createGuessBalls();
         gameResult.compareBalls(guessBalls, answerBalls);
         Views.printGameResult(gameResult.getBallCount(), gameResult.getStrikeCount());
-
     }
-
-    private void generateGuessBalls(){
+    private void createGuessBalls(){
         System.out.print(Views.ENTER_NUMBER);
-        guessBalls = new NumberBaseball(userInput.nextLine());
-        System.out.println(guessBalls.getBalls());
+        guessBalls = new BallsInfo(userInput.nextLine());
     }
 }
