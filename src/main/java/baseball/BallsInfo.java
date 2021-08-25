@@ -14,21 +14,22 @@ public class BallsInfo {
 
     private List<Integer> balls;
 
-    public BallsInfo(List<Integer> balls){
+    public BallsInfo(List<Integer> balls) {
         this.balls = balls;
     }
-    public BallsInfo(String userInput){
+
+    public BallsInfo(String userInput) {
         numberInputValidate(userInput);
         balls = Stream.of(userInput.split(""))
                 .map(s -> Integer.parseInt(s))
                 .collect(Collectors.toList());
     }
 
-    public List<Integer> getBalls(){
+    public List<Integer> getBalls() {
         return balls;
     }
 
-    private void numberInputValidate(String userInput){
+    private void numberInputValidate(String userInput) {
         if (Validate.hasWrongSize(userInput, BALL_COUNT) ||
                 !Validate.validateOnlyNumber(userInput) ||
                 Validate.hasParticularNumber(userInput, 0) ||

@@ -10,7 +10,7 @@ public class Views {
     public static final String WRONG_NUMBER_INPUT = "0을 포함하지 않고 중복되지 않는 3자리 정수를 입력하세요.";
     public static final String WRONG_ASK_REGAME = "1 또는 2를 입력하세요.";
 
-    public static void printGameResult(long ballCount, long strikeCount){
+    public static void printGameResult(long ballCount, long strikeCount) {
         if (ballCount > 0)
             System.out.printf(BALL_COUNT, ballCount);
         if (strikeCount > 0)

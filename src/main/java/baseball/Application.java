@@ -10,19 +10,18 @@ public class Application {
         PlayGame game = new PlayGame(scanner);
         Player player = new Player();
 
-        while (player.getStatus() != Player.Status.DONE){
+        while (player.getStatus() != Player.Status.DONE) {
             game.playGame();
             askReGame(player, scanner);
         }
     }
 
-    private static void askReGame(Player player, Scanner scanner){
+    private static void askReGame(Player player, Scanner scanner) {
         try {
             System.out.println(Views.RE_GAME);
             if (!player.isReGame(scanner.nextLine()))
                 player.setStatusDone();
-        }
-        catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             askReGame(player, scanner);
         }
