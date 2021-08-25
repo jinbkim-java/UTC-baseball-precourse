@@ -23,7 +23,7 @@ public class PlayGame {
         System.out.println(Views.GAME_OVER);
     }
 
-   private void initialGame(){
+    private void initialGame(){
         gameResult = new GameResult();
         answerBalls = new BallsInfo(createRandomBalls());
     }
@@ -40,7 +40,13 @@ public class PlayGame {
         Views.printGameResult(gameResult.getBallCount(), gameResult.getStrikeCount());
     }
     private void createGuessBalls(){
-        System.out.print(Views.ENTER_NUMBER);
-        guessBalls = new BallsInfo(userInput.nextLine());
+        try {
+            System.out.print(Views.ENTER_NUMBER);
+            guessBalls = new BallsInfo(userInput.nextLine());
+        }
+        catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            createGuessBalls();
+        }
     }
 }

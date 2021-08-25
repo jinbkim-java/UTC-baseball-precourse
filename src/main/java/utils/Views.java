@@ -7,6 +7,8 @@ public class Views {
     public static final String GAME_OVER = "3개의 숫자를 모두 맞히셨습니다! 게임 종료";
     public static final String RE_GAME = "게임을 새로 시작하려면 1, 종료하려면 2를 입력하세요.";
     public static final String NOTHING = "낫싱";
+    public static final String WRONG_NUMBER_INPUT = "0을 포함하지 않고 중복되지 않는 3자리 정수를 입력하세요.";
+    public static final String WRONG_ASK_REGAME = "1 또는 2를 입력하세요.";
 
     public static void printGameResult(long ballCount, long strikeCount){
         if (ballCount > 0)
